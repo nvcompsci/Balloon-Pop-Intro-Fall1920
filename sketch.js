@@ -12,12 +12,16 @@ let balloon = {
 
 function setup() {
   createCanvas(400, 400);
+  createBalloons()
 }
 
 function draw() {
   background(220);
-  createBalloons()
-  drawBalloon( balloons[balloons.length-1] )
+  for (let i = 0; i < 20; i++) {
+    drawBalloon(balloons[i])
+    balloons[i].x += random(-10,10)
+    balloons[i].y += random(-10,10)
+  }
 }
 
 //Define function to draw one balloon
@@ -27,14 +31,16 @@ function drawBalloon(bln) {
 }
 
 function createBalloons() {
-  let temp_balloon = {
-    x: random(width),
-    y: random(height),
-    width: 50,
-    height: 75,
-    color: "red",
-    effect: 3
+  for (let i = 0; i < 20; i++) {
+    let temp_balloon = {
+      x: random(width),
+      y: random(height),
+      width: 50,
+      height: 75,
+      color: "red",
+      effect: 3
+    }
+    //Add new balloon to ballons group/array
+    balloons.push(temp_balloon)
   }
-  //Add new balloon to ballons group/array
-  balloons.push(temp_balloon)
 }
