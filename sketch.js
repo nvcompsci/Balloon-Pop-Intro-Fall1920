@@ -19,8 +19,8 @@ function draw() {
   background(220);
   for (let i = 0; i < 20; i++) {
     drawBalloon(balloons[i])
-    balloons[i].x += random(-10,10)
-    balloons[i].y += random(-10,10)
+    balloons[i].x += random(-5,5)
+    balloons[i].y += random(-5,5)
   }
 }
 
@@ -35,12 +35,21 @@ function createBalloons() {
     let temp_balloon = {
       x: random(width),
       y: random(height),
-      width: 50,
-      height: 75,
+      width: 25,
+      height: 50,
       color: "red",
       effect: 3
     }
     //Add new balloon to ballons group/array
     balloons.push(temp_balloon)
+  }
+}
+
+function mouseClicked() {
+  for (let i = 0; i < 20; i++) {
+    let balloon = balloons[i]
+    if (dist(balloon.x, balloon.y,mouseX,mouseY) < balloon.width/2) {
+        alert(i)
+    }
   }
 }
