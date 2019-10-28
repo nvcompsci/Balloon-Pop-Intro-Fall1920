@@ -1,5 +1,6 @@
 //Create array to contain balloons
 let balloons = []
+let score = 0
 
 let balloon = {
   x: 100,
@@ -17,10 +18,13 @@ function setup() {
 
 function draw() {
   background(220);
+  text("Score: "+score,10,10)
   for (let i = 0; i < 20; i++) {
+    if (!balloons[i].alive)
+      continue;
     drawBalloon(balloons[i])
-    balloons[i].x += random(-5,5)
-    balloons[i].y += random(-5,5)
+    balloons[i].x += random(-2,2)
+    balloons[i].y += random(-2,2)
   }
 }
 
@@ -38,7 +42,8 @@ function createBalloons() {
       width: 25,
       height: 50,
       color: "red",
-      effect: 3
+      effect: 3,
+      alive: true
     }
     //Add new balloon to ballons group/array
     balloons.push(temp_balloon)
@@ -49,7 +54,13 @@ function mouseClicked() {
   for (let i = 0; i < 20; i++) {
     let balloon = balloons[i]
     if (dist(balloon.x, balloon.y,mouseX,mouseY) < balloon.width/2) {
-        alert(i)
+        popBalloon(balloon)
+        //alert(i)
     }
   }
+}
+
+function popBalloon(balloon) {
+    balloon.alive = false
+    score += 3
 }
